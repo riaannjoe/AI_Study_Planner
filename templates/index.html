@@ -2,47 +2,56 @@
 <html>
 <head>
     <title>AI Study Planner</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
 
-    <h1>AI Study Planner </h1>
+    <div class="container">
 
-    <form method="POST">
+        <h1>AI Study Planner </h1>
 
-        <label>Subjects:</label><br>
-        <input type="text" name="subjects" placeholder="Math, Physics, Chemistry"><br><br>
+        <form method="POST">
 
-        <label>Days Left:</label><br>
-        <input type="number" name="days"><br><br>
+            <label>Subjects:</label><br>
+            <input type="text" name="subjects" placeholder="Math, Physics, Chemistry"><br>
 
-        <label>Study Hours Per Day:</label><br>
-        <input type="number" name="hours"><br><br>
+            <label>Days Left:</label><br>
+            <input type="number" name="days"><br>
 
-        <button type="submit">Generate Plan</button>
+            <label>Study Hours Per Day:</label><br>
+            <input type="number" name="hours"><br>
 
-    </form>
+            <button type="submit">Generate Plan</button>
 
-    <hr>
+        </form>
 
-    {% if plan %}
+        {% if plan %}
 
-        <h2>Your Study Plan</h2>
+        <div class="study-plan">
 
-        {% for day in plan %}
+            <h2>Your Study Plan</h2>
 
-            <h3>{{ day.date }}</h3>
+            {% for day in plan %}
 
-            <ul>
-                {% for task in day.tasks %}
-                    <li>
-                        {{ task.subject }} → {{ task.hours }} hrs
-                    </li>
-                {% endfor %}
-            </ul>
+                <h3>{{ day.date }}</h3>
 
-        {% endfor %}
+                <ul>
+                    {% for task in day.tasks %}
+                        <li>
+                            {{ task.subject }} → {{ task.hours }} hrs
+                        </li>
+                    {% endfor %}
+                </ul>
 
-    {% endif %}
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+    </div>
 
 </body>
 </html>
