@@ -6,7 +6,43 @@
 <body>
 
     <h1>AI Study Planner </h1>
-    <p>Your smart study companion</p>
+
+    <form method="POST">
+
+        <label>Subjects:</label><br>
+        <input type="text" name="subjects" placeholder="Math, Physics, Chemistry"><br><br>
+
+        <label>Days Left:</label><br>
+        <input type="number" name="days"><br><br>
+
+        <label>Study Hours Per Day:</label><br>
+        <input type="number" name="hours"><br><br>
+
+        <button type="submit">Generate Plan</button>
+
+    </form>
+
+    <hr>
+
+    {% if plan %}
+
+        <h2>Your Study Plan</h2>
+
+        {% for day in plan %}
+
+            <h3>{{ day.date }}</h3>
+
+            <ul>
+                {% for task in day.tasks %}
+                    <li>
+                        {{ task.subject }} → {{ task.hours }} hrs
+                    </li>
+                {% endfor %}
+            </ul>
+
+        {% endfor %}
+
+    {% endif %}
 
 </body>
 </html>
